@@ -5,17 +5,20 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Mapa CasaPepe = new Mapa();
-        Jugador Pepe = new Jugador();
-        ConsoleKey tecla;
-        /* Console.CursorVisible = false;*/ 
         while (true)
         {
-            Console.Clear();
-            tecla = Console.ReadKey().Key;
-            CasaPepe.Dibuja();
-            Pepe.Dibuja();
-            Console.ReadKey(true);
+            Mapa CasaPepe = new Mapa();
+            Jugador Pepe = new Jugador(CasaPepe);
+            Interfaz partida = new Interfaz();
+            ConsoleKey tecla;
+            Console.CursorVisible = false;
+            while (Pepe.Salir() == false)
+            {
+                CasaPepe.Dibuja();
+                Pepe.Dibuja();
+                tecla = Console.ReadKey().Key;
+                Pepe.Movimiento(tecla);
+            }
         }
     }
 }

@@ -8,6 +8,8 @@ namespace DAW.PRO._2._5.RandomWalker
     public enum Terreno
     {
         Suelo,
-        Muro
+        Muro,
+        Cervezas,
+        Salida
     }
 }
