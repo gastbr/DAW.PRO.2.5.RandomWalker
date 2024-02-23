@@ -28,6 +28,14 @@ namespace DAW.PRO._2._5.RandomWalker
             RandomWalker(450);
         }
 
+        public Terreno GetTerreno(int x, int y)
+        {
+            return celdas[x, y].Terreno;
+        }
+        public void SetTerreno(int x, int y, Terreno NuevoTerreno)
+        {
+            celdas[x, y].Terreno = NuevoTerreno;
+        }
         public void Dibuja()
         {
             Console.SetCursorPosition(0, 0);
@@ -38,21 +46,20 @@ namespace DAW.PRO._2._5.RandomWalker
                 {
                     if (celdas[j, i].Terreno == Terreno.Suelo) { Console.Write(" "); }
                     else if (celdas[j, i].Terreno == Terreno.Salida) { Console.Write("X"); }
+                    else if (celdas[j, i].Terreno == Terreno.Objeto) { Console.Write("o"); }
                     else { Console.Write("█"); }
                 }
             }
         }
-
         public void RandomWalker(int CantidadSuelo)
         {
             int dir;
             int x = ancho / 2;
             int y = alto / 2;
-            int andado = 0;
+            int tirado = 0;
 
             do
             {
-                celdas[x, y].Terreno = Terreno.Suelo;
                 if (x < 3 || y < 2 || x > (ancho - 5) || y > (alto - 3))
                 {
                     x = ancho / 2;
@@ -60,21 +67,15 @@ namespace DAW.PRO._2._5.RandomWalker
                 }
                 else
                 {
-                    if (celdas[x, y].Terreno == Terreno.Muro)
-                    {
-                        celdas[x, y].Terreno = Terreno.Suelo;
-                        andado++;
-                    }
+                    tirado = TiraMuro(x, y, tirado);
                     dir = r.Next(4);
                     switch (dir)
                     {
                         case 0:
                             x++;
-                            celdas[x, y].Terreno = Terreno.Suelo;
-                            andado++;
+                            tirado = TiraMuro(x, y, tirado);
                             x++;
-                            celdas[x, y].Terreno = Terreno.Suelo;
-                            andado++;
+                            tirado = TiraMuro(x, y, tirado);
                             x++;
                             break;
                         case 1:
@@ -82,11 +83,9 @@ namespace DAW.PRO._2._5.RandomWalker
                             break;
                         case 2:
                             x--;
-                            celdas[x, y].Terreno = Terreno.Suelo;
-                            andado++;
+                            tirado = TiraMuro(x, y, tirado);
                             x--;
-                            celdas[x, y].Terreno = Terreno.Suelo;
-                            andado++;
+                            tirado = TiraMuro(x, y, tirado);
                             x--;
                             break;
                         case 3:
@@ -95,27 +94,44 @@ namespace DAW.PRO._2._5.RandomWalker
                     }
                 }
             }
-            while (andado < CantidadSuelo);
+            while (tirado < CantidadSuelo);
             celdas[x, y].Terreno = Terreno.Salida;
         }
-        public bool TiraMuro(int x, int y)
+        public int TiraMuro(int x, int y, int tirado)
         {
+            int random = r.Next(100);
             if (celdas[x, y].Terreno == Terreno.Muro)
             {
-                celdas[x, y].Terreno = Terreno.Suelo;
+                if (random == 1)
+                {
+                    celdas[x, y].Terreno = Terreno.Objeto;
+                }
+                else
+                {
+                    celdas[x, y].Terreno = Terreno.Suelo;
+                }
+                tirado++;
             }
-            return celdas[x, y].Terreno == Terreno.Suelo;
+            return tirado;
         }
-
         public bool EsSuelo(int x, int y)
         {
-            return celdas[x, y].Terreno == Terreno.Suelo || celdas[x, y].Terreno == Terreno.Salida;
+            return celdas[x, y].Terreno == Terreno.Suelo || celdas[x, y].Terreno == Terreno.Salida || celdas[x, y].Terreno == Terreno.Objeto;
         }
-
         public bool EsSalida(int x, int y)
         {
             return celdas[x, y].Terreno == Terreno.Salida;
         }
+        public int RecogeObjeto(int posX, int posY, int objetos)
+        {
+            if (celdas[posX, posY].Terreno == Terreno.Objeto)
+            {
+                celdas[posX, posY].Terreno = Terreno.Objeto;
+                objetos++;
+            }
+            return objetos;
+        }
+
 
 
 

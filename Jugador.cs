@@ -12,15 +12,17 @@ namespace DAW.PRO._2._5.RandomWalker
         int posX;
         int posY;
         Mapa mapa;
+        int objetos;
         public Jugador(Mapa MapaJug)
         {
+            objetos = 0;
             mapa = MapaJug;
             posX = mapa.ancho / 2;
             posY = mapa.alto / 2;
         }
         public void Dibuja()
         {
-            Console.SetCursorPosition(posX, posY+1);
+            Console.SetCursorPosition(posX, posY + 1);
             Console.Write('@');
         }
         public void Movimiento(ConsoleKey tecla)

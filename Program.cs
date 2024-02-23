@@ -5,11 +5,14 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        Mapa CasaPepe;
+        Jugador Pepe;
+        Interfaz partida;
         while (true)
         {
-            Mapa CasaPepe = new Mapa();
-            Jugador Pepe = new Jugador(CasaPepe);
-            Interfaz partida = new Interfaz();
+            CasaPepe = new Mapa();
+            Pepe = new Jugador(CasaPepe);
+            partida = new Interfaz();
             ConsoleKey tecla;
             Console.CursorVisible = false;
             while (Pepe.Salir() == false)

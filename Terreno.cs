@@ -9,7 +9,7 @@ namespace DAW.PRO._2._5.RandomWalker
     {
         Suelo,
         Muro,
-        Cervezas,
+        Objeto,
         Salida
     }
 }
