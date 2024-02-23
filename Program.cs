@@ -7,6 +7,7 @@ internal class Program
     {
         while (true)
         {
+            /* dsasda */
             Mapa CasaPepe = new Mapa();
             Jugador Pepe = new Jugador(CasaPepe);
             Interfaz partida = new Interfaz();
