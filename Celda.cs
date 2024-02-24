@@ -9,7 +9,6 @@ namespace DAW.PRO._2._5.RandomWalker
     internal class Celda
     {
         public Terreno Terreno;
-
         public Celda() {
             Terreno = Terreno.Muro;
         }

@@ -12,7 +12,6 @@ namespace DAW.PRO._2._5.RandomWalker
         Celda[,] celdas;
         public int alto;
         public int ancho;
-        int objetos;
         public Mapa()
         {
             alto = 20;
@@ -26,15 +25,6 @@ namespace DAW.PRO._2._5.RandomWalker
                 }
             }
             RandomWalker(450);
-        }
-
-        public Terreno GetTerreno(int x, int y)
-        {
-            return celdas[x, y].Terreno;
-        }
-        public void SetTerreno(int x, int y, Terreno NuevoTerreno)
-        {
-            celdas[x, y].Terreno = NuevoTerreno;
         }
         public void Dibuja()
         {
@@ -126,7 +116,7 @@ namespace DAW.PRO._2._5.RandomWalker
         {
             if (celdas[posX, posY].Terreno == Terreno.Objeto)
             {
-                celdas[posX, posY].Terreno = Terreno.Objeto;
+                celdas[posX, posY].Terreno = Terreno.Suelo;
                 objetos++;
             }
             return objetos;

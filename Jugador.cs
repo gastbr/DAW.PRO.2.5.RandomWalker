@@ -12,10 +12,8 @@ namespace DAW.PRO._2._5.RandomWalker
         int posX;
         int posY;
         Mapa mapa;
-        int objetos;
         public Jugador(Mapa MapaJug)
         {
-            objetos = 0;
             mapa = MapaJug;
             posX = mapa.ancho / 2;
             posY = mapa.alto / 2;
@@ -25,41 +23,51 @@ namespace DAW.PRO._2._5.RandomWalker
             Console.SetCursorPosition(posX, posY + 1);
             Console.Write('@');
         }
-        public void Movimiento(ConsoleKey tecla)
+        public int Movimiento(ConsoleKey tecla, int objetos, Mapa mapaNuevo)
         {
             Console.SetCursorPosition(posX, posY);
             Console.Write(' ');
             switch (tecla)
             {
                 case ConsoleKey.UpArrow:
-                    if (mapa.EsSuelo(posX, posY - 1))
+                    if (mapaNuevo.EsSuelo(posX, posY - 1))
                     {
                         posY--;
                     }
+                    objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
                 case ConsoleKey.DownArrow:
-                    if (mapa.EsSuelo(posX, posY + 1))
+                    if (mapaNuevo.EsSuelo(posX, posY + 1))
                     {
                         posY++;
                     }
+                    objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
                 case ConsoleKey.LeftArrow:
-                    if (mapa.EsSuelo(posX - 1, posY))
+                    if (mapaNuevo.EsSuelo(posX - 1, posY))
                     {
                         posX--;
                     }
+                    objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
                 case ConsoleKey.RightArrow:
-                    if (mapa.EsSuelo(posX + 1, posY))
+                    if (mapaNuevo.EsSuelo(posX + 1, posY))
                     {
                         posX++;
                     }
+                    objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
             }
+            this.mapa = mapaNuevo;
+            return objetos;
         }
         public bool Salir()
         {
             return mapa.EsSalida(posX, posY);
+        }
+        public Mapa GetMapa()
+        {
+            return this.mapa;
         }
     }
 }
