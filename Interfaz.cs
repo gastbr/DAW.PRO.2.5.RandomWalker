@@ -23,7 +23,12 @@ namespace DAW.PRO._2._5.RandomWalker
                 CasaPepe.Dibuja();
                 Pepe.Dibuja();
                 dibujaInterfaz(nivel, objetos);
-                tecla = Console.ReadKey().Key;
+                if (tecla == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Environment.Exit(0);
+                }
+                tecla = Console.ReadKey(true).Key;
                 objetos = Pepe.Movimiento(tecla, objetos, CasaPepe);
                 CasaPepe = Pepe.GetMapa();
             }
@@ -31,11 +36,13 @@ namespace DAW.PRO._2._5.RandomWalker
         }
         public void dibujaInterfaz(int nivel, int objetos)
         {
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(2, CasaPepe.alto + 2);
             Console.WriteLine("¡Ayuda al borracho Pepe a encontrar la salida de su casa!");
-            Console.SetCursorPosition(CasaPepe.ancho + 2, 0);
+            Console.SetCursorPosition(6, CasaPepe.alto + 3);
+            Console.WriteLine("Flechas para moverte. Esc para salir.");
+            Console.SetCursorPosition(6, CasaPepe.alto + 5);
             Console.WriteLine("Nivel: " + nivel);
-            Console.SetCursorPosition(CasaPepe.ancho + 2, 1);
+            Console.SetCursorPosition(6, CasaPepe.alto + 6);
             if (objetos > 0)
             {
                 Console.WriteLine("Cervezas recogidas: " + objetos);
