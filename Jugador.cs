@@ -30,6 +30,7 @@ namespace DAW.PRO._2._5.RandomWalker
             switch (tecla)
             {
                 case ConsoleKey.UpArrow:
+                case ConsoleKey.W:
                     if (mapaNuevo.EsSuelo(posX, posY - 1))
                     {
                         posY--;
@@ -37,6 +38,7 @@ namespace DAW.PRO._2._5.RandomWalker
                     objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
                 case ConsoleKey.DownArrow:
+                case ConsoleKey.S:
                     if (mapaNuevo.EsSuelo(posX, posY + 1))
                     {
                         posY++;
@@ -44,6 +46,7 @@ namespace DAW.PRO._2._5.RandomWalker
                     objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
                 case ConsoleKey.LeftArrow:
+                case ConsoleKey.A:
                     if (mapaNuevo.EsSuelo(posX - 1, posY))
                     {
                         posX--;
@@ -51,6 +54,7 @@ namespace DAW.PRO._2._5.RandomWalker
                     objetos = mapaNuevo.RecogeObjeto(posX, posY, objetos);
                     break;
                 case ConsoleKey.RightArrow:
+                case ConsoleKey.D:
                     if (mapaNuevo.EsSuelo(posX + 1, posY))
                     {
                         posX++;
